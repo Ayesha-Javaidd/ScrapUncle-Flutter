@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final theme = Theme.of(context); // Access app-wide theme
 
     return Scaffold(
       body: Padding(
@@ -21,15 +21,16 @@ class LoginScreen extends StatelessWidget {
         child: ListView(
           children: [
             SizedBox(height: 80),
+
             Center(child: Image.asset('assets/images/logo.png', height: 120)),
             SizedBox(height: 10),
+
             Center(
               child: Text(
                 "ScrapUncle",
-                style: TextStyle(
+                style: theme.textTheme.headlineSmall?.copyWith(
                   fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.green[600],
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -39,7 +40,10 @@ class LoginScreen extends StatelessWidget {
               controller: emailController,
               decoration: InputDecoration(
                 labelText: "Email",
-                prefixIcon: Icon(Icons.email_outlined, color: Colors.green),
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                  color: theme.colorScheme.primary,
+                ),
               ),
             ),
             SizedBox(height: 16),
@@ -49,7 +53,10 @@ class LoginScreen extends StatelessWidget {
               obscureText: true,
               decoration: InputDecoration(
                 labelText: "Password",
-                prefixIcon: Icon(Icons.lock_outline, color: Colors.green),
+                prefixIcon: Icon(
+                  Icons.lock_outline,
+                  color: theme.colorScheme.primary,
+                ),
               ),
             ),
             SizedBox(height: 24),
@@ -67,14 +74,14 @@ class LoginScreen extends StatelessWidget {
                 },
                 child: Text.rich(
                   TextSpan(
-                    text: "Don’t have an account? ",
-                    style: TextStyle(color: Colors.grey[600]),
+                    text: "Don’t have an account?  ",
+                    style: theme.textTheme.bodyMedium,
                     children: [
                       TextSpan(
                         text: "Sign up",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green[700],
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],

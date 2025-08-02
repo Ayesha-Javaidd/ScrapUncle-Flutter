@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scrapuncle_flutter/screens/dashboard_screen.dart';
 import 'screens/splash_screen.dart';
 
 void main() {
@@ -23,23 +24,32 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(color: Colors.white),
           titleTextStyle: TextStyle(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: 18,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w500,
           ),
         ),
 
-        primarySwatch: Colors.green,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          primary: Colors.green[600], // Makes theme.colorScheme.primary = green
+        ),
+
         scaffoldBackgroundColor: Colors.white,
 
         // Text color across the app
         textTheme: TextTheme(
           headlineSmall: TextStyle(
-            color: Colors.green[700],
+            color: Colors.green[600],
             fontWeight: FontWeight.bold,
           ),
-          titleMedium: TextStyle(color: Colors.grey[700]),
-          bodyMedium: TextStyle(color: Colors.grey[600]),
+
+          titleMedium: TextStyle(color: Colors.green[600]),
+          bodyMedium: TextStyle(color: Colors.grey[700]),
+        ),
+
+        iconTheme: IconThemeData(
+          color: Colors.green[600], // or Colors.green
         ),
 
         textSelectionTheme: TextSelectionThemeData(
@@ -72,7 +82,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: SplashScreen(),
+      home: DashboardScreen(),
     );
   }
 }

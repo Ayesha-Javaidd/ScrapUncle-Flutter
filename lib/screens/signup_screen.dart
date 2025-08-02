@@ -13,6 +13,7 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // Access app-wide theme
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -31,10 +32,9 @@ class SignupScreen extends StatelessWidget {
                   Center(
                     child: Text(
                       "Sign Up",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.green[600],
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -92,9 +92,9 @@ class SignupScreen extends StatelessWidget {
                         },
                         child: Text(
                           "Login",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green[700],
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
