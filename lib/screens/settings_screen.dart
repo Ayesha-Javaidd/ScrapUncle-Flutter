@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:scrapuncle_flutter/screens/about_us.dart';
+import 'package:scrapuncle_flutter/screens/privacy_policy.dart';
+import 'package:scrapuncle_flutter/screens/profile_screen.dart';
+import 'package:scrapuncle_flutter/screens/terms_and_conditions.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -6,11 +10,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-        backgroundColor: Colors.green,
-        elevation: 0,
-      ),
+      appBar: AppBar(title: const Text('Settings')),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
@@ -21,7 +21,10 @@ class SettingsScreen extends StatelessWidget {
             icon: Icons.person_outline,
             title: 'Profile',
             onTap: () {
-              // TODO: Navigate to profile
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
             },
           ),
           _buildListTile(
@@ -36,12 +39,26 @@ class SettingsScreen extends StatelessWidget {
           _buildListTile(
             icon: Icons.description_outlined,
             title: 'Terms & Conditions',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TermsAndConditionsScreen(),
+                ),
+              );
+            },
           ),
           _buildListTile(
             icon: Icons.privacy_tip_outlined,
             title: 'Privacy Policy',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PrivacyPolicyScreen(),
+                ),
+              );
+            },
           ),
 
           const SizedBox(height: 24),
@@ -50,7 +67,12 @@ class SettingsScreen extends StatelessWidget {
           _buildListTile(
             icon: Icons.info_outline,
             title: 'About',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutUsScreen()),
+              );
+            },
           ),
           _buildListTile(
             icon: Icons.logout,
@@ -70,7 +92,7 @@ class SettingsScreen extends StatelessWidget {
       child: Text(
         title,
         style: const TextStyle(
-          fontSize: 16,
+          fontSize: 18,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 98, 97, 97),
         ),
@@ -90,7 +112,7 @@ class SettingsScreen extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(
-          fontSize: 14,
+          fontSize: 15,
           color: textColor ?? Colors.grey[700],
           fontWeight: FontWeight.normal,
         ),

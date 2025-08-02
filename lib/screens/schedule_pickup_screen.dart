@@ -56,15 +56,11 @@ class _SchedulePickupScreenState extends State<SchedulePickupScreen> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Pickup Scheduled!')));
-
-      // TODO: Add actual submission logic here
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
       appBar: AppBar(title: const Text('Schedule Pickup')),
       body: LayoutBuilder(
@@ -77,9 +73,10 @@ class _SchedulePickupScreenState extends State<SchedulePickupScreen> {
                 child: Form(
                   key: _formKey,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      SizedBox(height: 50),
                       DropdownButtonFormField<String>(
                         decoration: const InputDecoration(
                           labelText: 'Estimated Weight',
@@ -99,6 +96,7 @@ class _SchedulePickupScreenState extends State<SchedulePickupScreen> {
                             : null,
                       ),
 
+                      SizedBox(height: 30),
                       TextFormField(
                         style: TextStyle(color: Colors.green[700]),
                         readOnly: true,
@@ -117,7 +115,7 @@ class _SchedulePickupScreenState extends State<SchedulePickupScreen> {
                             ? 'Please select a date'
                             : null,
                       ),
-
+                      SizedBox(height: 30),
                       TextFormField(
                         style: TextStyle(color: Colors.green[700]),
                         readOnly: true,
@@ -136,13 +134,11 @@ class _SchedulePickupScreenState extends State<SchedulePickupScreen> {
                             ? 'Please select a time'
                             : null,
                       ),
-
+                      SizedBox(height: 30),
                       TextFormField(
                         controller: _addressController,
                         maxLines: 3,
-                        style: TextStyle(
-                        color: Colors.green[700],
-                        ),
+                        style: TextStyle(color: Colors.green[700]),
                         decoration: const InputDecoration(
                           labelText: 'Pickup Address',
                           border: OutlineInputBorder(),
@@ -157,7 +153,7 @@ class _SchedulePickupScreenState extends State<SchedulePickupScreen> {
                             ? 'Please enter pickup address'
                             : null,
                       ),
-
+                      SizedBox(height: 30),
                       ElevatedButton(
                         onPressed: _schedulePickup,
                         style: ElevatedButton.styleFrom(

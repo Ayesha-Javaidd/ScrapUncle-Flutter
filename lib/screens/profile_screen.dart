@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:scrapuncle_flutter/screens/about_us.dart';
+import 'package:scrapuncle_flutter/screens/edit_profile.dart';
+import 'package:scrapuncle_flutter/screens/help_and_support.dart';
+import 'package:scrapuncle_flutter/screens/pickup_history_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -6,12 +10,12 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
       appBar: AppBar(title: const Text("Profile")),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Avatar Section
             CircleAvatar(
               radius: 48,
               backgroundColor: Colors.green.shade100,
@@ -42,19 +46,28 @@ class ProfileScreen extends StatelessWidget {
               context,
               icon: Icons.edit,
               title: "Edit Profile",
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const EditProfileScreen(),
+                  ),
+                );
+              },
             ),
-            _buildListTile(
-              context,
-              icon: Icons.location_on_outlined,
-              title: "My Address",
-              onTap: () {},
-            ),
+
             _buildListTile(
               context,
               icon: Icons.history,
               title: "Pickup History",
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PickupHistoryScreen(),
+                  ),
+                );
+              },
             ),
 
             const SizedBox(height: 16),
@@ -63,13 +76,27 @@ class ProfileScreen extends StatelessWidget {
               context,
               icon: Icons.info_outline,
               title: "About Us",
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AboutUsScreen(),
+                  ),
+                );
+              },
             ),
             _buildListTile(
               context,
               icon: Icons.help_outline,
               title: "Help & Support",
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HelpSupportScreen(),
+                  ),
+                );
+              },
             ),
 
             const SizedBox(height: 16),

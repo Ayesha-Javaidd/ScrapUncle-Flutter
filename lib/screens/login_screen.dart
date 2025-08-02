@@ -16,11 +16,13 @@ class LoginScreen extends StatelessWidget {
     final theme = Theme.of(context); // Access app-wide theme
 
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(title: Text("Login")),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
         child: ListView(
           children: [
-            SizedBox(height: 80),
+            SizedBox(height: 60),
 
             Center(child: Image.asset('assets/images/logo.png', height: 120)),
             SizedBox(height: 10),
@@ -42,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                 labelText: "Email",
                 prefixIcon: Icon(
                   Icons.email_outlined,
-                  color: theme.colorScheme.primary,
+                  color: Colors.green[600],
                 ),
               ),
             ),
@@ -53,10 +55,7 @@ class LoginScreen extends StatelessWidget {
               obscureText: true,
               decoration: InputDecoration(
                 labelText: "Password",
-                prefixIcon: Icon(
-                  Icons.lock_outline,
-                  color: theme.colorScheme.primary,
-                ),
+                prefixIcon: Icon(Icons.lock_outline, color: Colors.green[600]),
               ),
             ),
             SizedBox(height: 24),

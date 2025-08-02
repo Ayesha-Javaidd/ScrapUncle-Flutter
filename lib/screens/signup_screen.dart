@@ -7,20 +7,14 @@ class SignupScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void _handleSignup() {
-    // TODO: Implement Firebase signup logic
-  }
+  void _handleSignup() {}
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context); // Access app-wide theme
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "ScrapUncle",
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-      ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(title: Text("Signup")),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
         child: Column(
@@ -31,7 +25,7 @@ class SignupScreen extends StatelessWidget {
                   SizedBox(height: 70),
                   Center(
                     child: Text(
-                      "Sign Up",
+                      "ScrapUncle",
                       style: theme.textTheme.headlineSmall?.copyWith(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,

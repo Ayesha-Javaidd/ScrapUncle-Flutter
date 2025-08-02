@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:scrapuncle_flutter/screens/dashboard_screen.dart';
-import 'screens/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
 
-        // Global AppBar styling
         appBarTheme: AppBarTheme(
           centerTitle: true,
           backgroundColor: Colors.green,
@@ -34,10 +32,8 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.green,
           primary: Colors.green[600], // Makes theme.colorScheme.primary = green
         ),
+        scaffoldBackgroundColor: Color.fromARGB(255, 231, 244, 229),
 
-        scaffoldBackgroundColor: Colors.white,
-
-        // Text color across the app
         textTheme: TextTheme(
           headlineSmall: TextStyle(
             color: Colors.green[600],
