@@ -1,66 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class PickupHistoryScreen extends StatelessWidget {
   const PickupHistoryScreen({super.key});
 
-  // Dummy data
-  final List<Map<String, dynamic>> _history = const [
-    {
-      'date': '30 July 2025',
-      'time': '10:30 AM',
-      'weight': '8 KG',
-      'address': '123 Green Street, Lahore',
-      'status': 'Completed',
-    },
-    {
-      'date': '22 July 2025',
-      'time': '2:00 PM',
-      'weight': '12 KG',
-      'address': '45 Eco Avenue, Lahore',
-      'status': 'Completed',
-    },
-    {
-      'date': '15 July 2025',
-      'time': '11:00 AM',
-      'weight': '5 KG',
-      'address': '78 Greenway Blvd, Lahore',
-      'status': 'Missed',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      return const Scaffold(
+        body: Center(child: Text("Please login to view history")),
+      );
+    }
+
     return Scaffold(
-     
       appBar: AppBar(title: const Text('Pickup History')),
-      body: _history.isEmpty
-          ? const Center(
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection("pickups")
+            .where("userId", isEqualTo: user.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return const Center(
               child: Text(
                 'No pickup history yet.',
                 style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
-            )
-          : ListView.builder(
-              padding: const EdgeInsets.all(20),
-              itemCount: _history.length,
-              itemBuilder: (context, index) {
-                final pickup = _history[index];
-                return _buildPickupCard(context, pickup);
-              },
-            ),
+            );
+          }
+
+          final pickups = snapshot.data!.docs;
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(20),
+            itemCount: pickups.length,
+            itemBuilder: (context, index) {
+              final data = pickups[index].data() as Map<String, dynamic>;
+
+              // Extract scheduledAt timestamp
+              final Timestamp scheduledAtTimestamp = data['scheduledAt'];
+              final DateTime scheduledAt = scheduledAtTimestamp.toDate();
+              final date =
+                  "${scheduledAt.day}/${scheduledAt.month}/${scheduledAt.year}";
+              final time = TimeOfDay.fromDateTime(scheduledAt).format(context);
+
+              final weight = data['weight'] ?? '';
+              final address = data['address'] ?? '';
+              final status = data['status'] ?? 'Pending';
+
+              return _buildPickupCard(
+                context: context,
+                date: date,
+                time: time,
+                weight: weight,
+                address: address,
+                status: status,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
-  Widget _buildPickupCard(BuildContext context, Map<String, dynamic> pickup) {
-    final isCompleted = pickup['status'] == 'Completed';
+  Widget _buildPickupCard({
+    required BuildContext context,
+    required String date,
+    required String time,
+    required String weight,
+    required String address,
+    required String status,
+  }) {
+    final isCompleted = status.toLowerCase() == 'completed';
 
     return Card(
-      margin: const EdgeInsets.only(bottom: 10, top: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 4,
       shadowColor: Colors.green.shade100,
       child: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -68,11 +94,11 @@ class PickupHistoryScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  pickup['date'],
+                  date,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green.shade700,
+                    color: Colors.green.shade600,
                   ),
                 ),
                 Container(
@@ -87,7 +113,7 @@ class PickupHistoryScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    pickup['status'],
+                    status,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: isCompleted
@@ -98,12 +124,12 @@ class PickupHistoryScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
-            _buildInfoRow(Icons.access_time, pickup['time']),
+            const SizedBox(height: 20),
+            _buildInfoRow(Icons.access_time, time),
             const SizedBox(height: 6),
-            _buildInfoRow(Icons.scale, pickup['weight']),
+            _buildInfoRow(Icons.scale, weight),
             const SizedBox(height: 6),
-            _buildInfoRow(Icons.location_on, pickup['address']),
+            _buildInfoRow(Icons.location_on, address),
           ],
         ),
       ),

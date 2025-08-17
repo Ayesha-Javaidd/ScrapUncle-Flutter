@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1025550643354",
+    "project_id": "scrapuncle-b4b06",
+    "storage_bucket": "scrapuncle-b4b06.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025550643354:android:ffbff5c9e5c29ff7252f23",
+        "android_client_info": {
+          "package_name": "com.example.scrapuncle_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvgenj1eQ8UJgzpyAbrbJSieyMgKYAZPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

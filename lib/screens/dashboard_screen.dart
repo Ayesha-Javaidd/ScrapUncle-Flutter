@@ -33,7 +33,7 @@ class DashboardScreen extends StatelessWidget {
               const PopupMenuItem<String>(
                 value: 'settings',
                 child: SizedBox(
-                  width: 150, 
+                  width: 150,
                   child: Text(
                     'Settings',
                     style: TextStyle(color: Color.fromARGB(255, 94, 93, 93)),
@@ -272,21 +272,137 @@ class DashboardScreen extends StatelessWidget {
                 const SizedBox(height: 30),
 
                 const Text(
-                  "About Us",
+                  "Our Services",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height: 8),
-                const Text(
-                  "Scrapuncle is a sustainable waste management platform helping you schedule scrap pickups effortlessly. We ensure responsible recycling to reduce landfill burden and contribute to a greener planet.",
+                const SizedBox(height: 16),
+
+                // Services Cards
+                Column(
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12), // 👈 Added padding
+                        child: ListTile(
+                          contentPadding: EdgeInsets
+                              .zero, // remove default ListTile padding
+                          leading: Icon(
+                            Icons.home_repair_service,
+                            color: Colors.green,
+                          ),
+                          title: Text(
+                            "Doorstep Scrap Pickup",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.green[700],
+                            ),
+                          ),
+                          subtitle: const Text(
+                            "Schedule a pickup at your convenience, and our team will collect scrap from your doorstep.",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 113, 112, 112),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                   const SizedBox(height: 12),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 3,
+                      child: Padding(
+                        padding: EdgeInsets.all(12), // 👈 Added padding
+                        child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: Icon(Icons.recycling, color: Colors.green),
+                          title: Text(
+                            "Responsible Recycling",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.green[700],
+                            ),
+                          ),
+                          subtitle: const Text(
+                            "We ensure that all collected materials are recycled responsibly to reduce landfill waste.",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 113, 112, 112),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 3,
+                      child: Padding(
+                        padding: EdgeInsets.all(12), // 👈 Added padding
+                        child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: Icon(
+                            Icons.attach_money,
+                            color: Colors.green,
+                          ),
+                          title: Text(
+                            "Fair & Transparent Rates",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.green[700],
+                            ),
+                          ),
+                          subtitle: const Text(
+                            "We provide competitive and clear rates for your scrap, ensuring fair value for your contribution.",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 113, 112, 112),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 3,
+                      child: Padding(
+                        padding: EdgeInsets.all(12), // 👈 Added padding
+                        child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: Icon(Icons.eco, color: Colors.green),
+                          title: Text(
+                            "Eco-friendly Waste Management",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.green[700],
+                            ),
+                          ),
+                          subtitle: const Text(
+                            "Join us in building a greener planet with sustainable and eco-friendly waste management practices.",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 113, 112, 112),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
                 ),
-                const SizedBox(height: 24),
-                const Text(
-                  "Contact",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(height: 8),
-                const Text("Phone: +92 3314551480"),
-                const Text("Email: support@scrapuncle.com"),
               ],
             ),
           ),
