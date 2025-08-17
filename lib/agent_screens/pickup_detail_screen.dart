@@ -1,18 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PickupDetailScreen extends StatelessWidget {
   final Map<String, String> pickup;
 
   const PickupDetailScreen({super.key, required this.pickup});
 
+  Future<void> _markAsCompleted(BuildContext context) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('pickups')
+          .doc(pickup['id']) // pickup doc ID
+          .update({'status': 'completed'});
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Pickup ${pickup['id']} marked as completed"),
+          backgroundColor: Colors.green[600],
+        ),
+      );
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error updating status: $e"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Pickup Details")),
+      appBar: AppBar(
+        title: const Text("Pickup Details"),
+        backgroundColor: Colors.green[600],
+        elevation: 0,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(20.0),
         child: Card(
-          elevation: 4,
+          elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -21,42 +50,51 @@ class PickupDetailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _detailRow("📦 Request ID", pickup['id']),
-                _detailRow("📍 Address", pickup['address']),
-                _detailRow("🚚 Status", pickup['status']),
-                SizedBox(height: 30),
-                ElevatedButton.icon(
-                  icon: Icon(Icons.check_circle_outline),
-                  label: Text("Mark as Completed"),
+                _detailRow(Icons.assignment, "Request ID", pickup['id']),
+                _detailRow(Icons.location_on, "Address", pickup['address']),
+                _detailRow(Icons.local_shipping, "Status", pickup['status']),
+                const SizedBox(height: 40),
+
+                ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green[600],
-                    minimumSize: Size(double.infinity, 48),
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          "Pickup ${pickup['id']} marked as completed",
-                        ),
-                      ),
-                    );
-                    Navigator.pop(context);
-                  },
+                  onPressed: () => _markAsCompleted(context),
+                  child: const Text(
+                    "Mark as Completed",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                  ),
                 ),
-                SizedBox(height: 16),
-                OutlinedButton.icon(
-                  icon: Icon(Icons.phone),
-                  label: Text("Contact Customer"),
+
+                const SizedBox(height: 16),
+
+                // 📞 Contact Customer Button
+                OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    minimumSize: Size(double.infinity, 48),
-                    side: BorderSide(color: Colors.green),
+                    minimumSize: const Size(double.infinity, 50),
+                    side: BorderSide(color: Colors.green.shade600, width: 1.5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   onPressed: () {
-                    // Add actual call logic using url_launcher here
+                    // TODO: integrate with url_launcher
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Calling customer...")),
+                      const SnackBar(content: Text("Calling customer...")),
                     );
                   },
+                  child: Text(
+                    "Contact Customer",
+                    style: TextStyle(
+                      color: Colors.green[700],
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -66,27 +104,41 @@ class PickupDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _detailRow(String label, String? value) {
+  Widget _detailRow(IconData icon, String label, String? value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: RichText(
-        text: TextSpan(
-          text: "$label: ",
-          style: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-          children: [
-            TextSpan(
-              text: value ?? "",
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Colors.grey[800],
-              ),
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, color: Colors.green[600], size: 24),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Header label in green
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.green[700],
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                // Value in grey, smaller
+                Text(
+                  value ?? "",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[700],
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

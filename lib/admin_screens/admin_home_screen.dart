@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:scrapuncle_flutter/admin_screens/admin_logout.dart';
 import 'package:scrapuncle_flutter/admin_screens/ageny_list_screen.dart';
+import 'package:scrapuncle_flutter/admin_screens/admin_profile.dart';
 
 import 'all_requests_screen.dart';
 import 'assign_agent_screen.dart';
-import 'report_screen.dart';
+
 import 'customer_list_screen.dart';
 
 class AdminHomeScreen extends StatelessWidget {
@@ -22,11 +24,7 @@ class AdminHomeScreen extends StatelessWidget {
         "icon": Icons.assignment_ind,
         "screen": AssignAgentScreen(),
       },
-      {
-        "title": "Generate Reports",
-        "icon": Icons.insert_chart_outlined,
-        "screen": ReportScreen(),
-      },
+
       {
         "title": "Customer List",
         "icon": Icons.people,
@@ -37,29 +35,42 @@ class AdminHomeScreen extends StatelessWidget {
         "icon": Icons.supervisor_account,
         "screen": AgentListScreen(),
       },
+      {
+        "title": "View Profile",
+        "icon": Icons.person,
+        "screen": ProfileScreen(),
+      },
+      {"title": "Logout", "icon": Icons.logout, "screen": AdminLogout()},
     ];
 
     return Scaffold(
-      appBar: AppBar(title: Text("Admin Dashboard")),
+      appBar: AppBar(title: const Text("Admin Dashboard")),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
-        child: GridView.builder(
-          itemCount: options.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            childAspectRatio: 1.0,
-          ),
-          itemBuilder: (context, index) {
-            final item = options[index];
-            return _buildCard(
-              context,
-              item["title"]! as String,
-              item["icon"] as IconData,
-              item["screen"] as Widget,
-            );
-          },
+        child: Column(
+          children: [
+            const SizedBox(height: 70),
+            Expanded(
+              child: GridView.builder(
+                itemCount: options.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                  childAspectRatio: 1.0,
+                ),
+                itemBuilder: (context, index) {
+                  final item = options[index];
+                  return _buildCard(
+                    context,
+                    item["title"]! as String,
+                    item["icon"] as IconData,
+                    item["screen"] as Widget,
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -78,7 +89,7 @@ class AdminHomeScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 239, 244, 239),
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black12,
               blurRadius: 10,
@@ -90,15 +101,8 @@ class AdminHomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 40, color: Colors.green[600]),
-            SizedBox(height: 12),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              // style: GoogleFonts.poppins(
-              //   fontSize: 16,
-              //   fontWeight: FontWeight.w500,
-              // ),
-            ),
+            const SizedBox(height: 12),
+            Text(title, textAlign: TextAlign.center),
           ],
         ),
       ),

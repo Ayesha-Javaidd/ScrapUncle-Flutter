@@ -12,7 +12,7 @@ plugins {
 android {
    
     namespace = "com.example.scrapuncle_flutter"
-    compileSdk = 34
+    compileSdk = 35
     ndkVersion = "27.0.12077973"  // 👈 Add this line
 
 

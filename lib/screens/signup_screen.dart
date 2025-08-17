@@ -67,7 +67,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
       final uid = cred.user!.uid;
 
-      // 2) Build Firestore document
       final userData = {
         "uid": uid,
         "name": name,
@@ -80,7 +79,6 @@ class _SignupScreenState extends State<SignupScreen> {
             FieldValue.serverTimestamp(), // 👈 server timestamp instead of device time
       }..removeWhere((key, value) => value == null || value == "");
 
-      // 3) Save to Firestore in `users` collection
       await FirebaseFirestore.instance
           .collection("users")
           .doc(uid)
@@ -173,7 +171,6 @@ class _SignupScreenState extends State<SignupScreen> {
               items: const [
                 DropdownMenuItem(value: "Customer", child: Text("Customer")),
                 DropdownMenuItem(value: "Agent", child: Text("Agent")),
-                DropdownMenuItem(value: "Admin", child: Text("Admin")),
               ],
               onChanged: (value) {
                 setState(() {

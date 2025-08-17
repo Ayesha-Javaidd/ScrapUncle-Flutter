@@ -63,10 +63,9 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // Themed Text
                   Text(
                     'ScrapUncle',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    style: theme.textTheme.bodyMedium?.copyWith(
                       color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -75,30 +74,19 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
-
             ListTile(
-              leading: Icon(
-                Icons.home,
-                color: Theme.of(context).iconTheme.color,
-              ),
+              leading: Icon(Icons.home, color: theme.iconTheme.color),
               title: Text(
                 'Home',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(fontSize: 15),
+                style: theme.textTheme.bodyMedium?.copyWith(fontSize: 15),
               ),
               onTap: () => Navigator.pop(context),
             ),
             ListTile(
-              leading: Icon(
-                Icons.price_change,
-                color: Theme.of(context).iconTheme.color,
-              ),
+              leading: Icon(Icons.price_change, color: theme.iconTheme.color),
               title: Text(
                 'Rates',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(fontSize: 15),
+                style: theme.textTheme.bodyMedium?.copyWith(fontSize: 15),
               ),
               onTap: () {
                 Navigator.push(
@@ -108,15 +96,10 @@ class DashboardScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(
-                Icons.schedule,
-                color: Theme.of(context).iconTheme.color,
-              ),
+              leading: Icon(Icons.schedule, color: theme.iconTheme.color),
               title: Text(
                 'Schedule',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(fontSize: 15),
+                style: theme.textTheme.bodyMedium?.copyWith(fontSize: 15),
               ),
               onTap: () {
                 Navigator.push(
@@ -128,15 +111,10 @@ class DashboardScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(
-                Icons.fire_truck,
-                color: Theme.of(context).iconTheme.color,
-              ),
+              leading: Icon(Icons.fire_truck, color: theme.iconTheme.color),
               title: Text(
                 'Pickup History',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(fontSize: 15),
+                style: theme.textTheme.bodyMedium?.copyWith(fontSize: 15),
               ),
               onTap: () {
                 Navigator.push(
@@ -148,15 +126,10 @@ class DashboardScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(
-                Icons.person,
-                color: Theme.of(context).iconTheme.color,
-              ),
+              leading: Icon(Icons.person, color: theme.iconTheme.color),
               title: Text(
                 'Profile',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(fontSize: 15),
+                style: theme.textTheme.bodyMedium?.copyWith(fontSize: 15),
               ),
               onTap: () {
                 Navigator.push(
@@ -170,17 +143,16 @@ class DashboardScreen extends StatelessWidget {
           ],
         ),
       ),
-
       body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 20),
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Image.asset('assets/images/logo.png', height: 120),
           ),
           const SizedBox(height: 15),
-
           Container(
-            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -197,9 +169,8 @@ class DashboardScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 40),
-
           Container(
-            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.green.shade50,
@@ -224,7 +195,6 @@ class DashboardScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 45),
-
           Center(
             child: Text(
               "Impact by Scrapuncle",
@@ -234,14 +204,13 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Image.asset('assets/images/recycle.png', height: 300),
           const SizedBox(height: 24),
-
           Container(
-            padding: EdgeInsets.all(20),
-            color: Color(0xFFDFF5DC),
+            padding: const EdgeInsets.all(20),
+            color: const Color(0xFFDFF5DC),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
                   child: SizedBox(
@@ -268,140 +237,42 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                const SizedBox(height: 30),
-
-                const Text(
-                  "Our Services",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                const SizedBox(height: 15),
+                Center(
+                  child: const Text(
+                    "Our Services",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
                 ),
                 const SizedBox(height: 16),
 
                 // Services Cards
-                Column(
-                  children: [
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12), // 👈 Added padding
-                        child: ListTile(
-                          contentPadding: EdgeInsets
-                              .zero, // remove default ListTile padding
-                          leading: Icon(
-                            Icons.home_repair_service,
-                            color: Colors.green,
-                          ),
-                          title: Text(
-                            "Doorstep Scrap Pickup",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.green[700],
-                            ),
-                          ),
-                          subtitle: const Text(
-                            "Schedule a pickup at your convenience, and our team will collect scrap from your doorstep.",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color.fromARGB(255, 113, 112, 112),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                   const SizedBox(height: 12),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 3,
-                      child: Padding(
-                        padding: EdgeInsets.all(12), // 👈 Added padding
-                        child: ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          leading: Icon(Icons.recycling, color: Colors.green),
-                          title: Text(
-                            "Responsible Recycling",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.green[700],
-                            ),
-                          ),
-                          subtitle: const Text(
-                            "We ensure that all collected materials are recycled responsibly to reduce landfill waste.",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color.fromARGB(255, 113, 112, 112),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 12),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 3,
-                      child: Padding(
-                        padding: EdgeInsets.all(12), // 👈 Added padding
-                        child: ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          leading: Icon(
-                            Icons.attach_money,
-                            color: Colors.green,
-                          ),
-                          title: Text(
-                            "Fair & Transparent Rates",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.green[700],
-                            ),
-                          ),
-                          subtitle: const Text(
-                            "We provide competitive and clear rates for your scrap, ensuring fair value for your contribution.",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color.fromARGB(255, 113, 112, 112),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 12),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 3,
-                      child: Padding(
-                        padding: EdgeInsets.all(12), // 👈 Added padding
-                        child: ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          leading: Icon(Icons.eco, color: Colors.green),
-                          title: Text(
-                            "Eco-friendly Waste Management",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.green[700],
-                            ),
-                          ),
-                          subtitle: const Text(
-                            "Join us in building a greener planet with sustainable and eco-friendly waste management practices.",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color.fromARGB(255, 113, 112, 112),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                  ],
+                _serviceCard(
+                  icon: Icons.home_repair_service,
+                  title: "Doorstep Scrap Pickup",
+                  subtitle:
+                      "Schedule a pickup at your convenience, and our team will collect scrap from your doorstep.",
+                ),
+                const SizedBox(height: 12),
+                _serviceCard(
+                  icon: Icons.recycling,
+                  title: "Responsible Recycling",
+                  subtitle:
+                      "We ensure that all collected materials are recycled responsibly to reduce landfill waste.",
+                ),
+                const SizedBox(height: 12),
+                _serviceCard(
+                  icon: Icons.attach_money,
+                  title: "Fair & Transparent Rates",
+                  subtitle:
+                      "We provide competitive and clear rates for your scrap, ensuring fair value for your contribution.",
+                ),
+                const SizedBox(height: 12),
+                _serviceCard(
+                  icon: Icons.eco,
+                  title: "Eco-friendly Waste Management",
+                  subtitle:
+                      "Join us in building a greener planet with sustainable and eco-friendly waste management practices.",
                 ),
               ],
             ),
@@ -410,4 +281,56 @@ class DashboardScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _serviceCard({
+  required IconData icon,
+  required String title,
+  required String subtitle,
+}) {
+  return Card(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    elevation: 4,
+    shadowColor: Colors.green.shade100,
+    child: Padding(
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.green.shade50,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, size: 32, color: Colors.green.shade600),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Colors.green.shade600,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: Color.fromARGB(255, 113, 112, 112),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
